@@ -10,6 +10,7 @@ export const movieQuery = gql`
       watched
       director {
         name
+        id
       }
     }
   }
