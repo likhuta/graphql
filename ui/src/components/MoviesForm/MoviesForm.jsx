@@ -14,7 +14,6 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import withHocs from './MoviesFormHoc';
 
-
 class MoviesForm extends React.Component {
   handleClose = () => {
     this.props.onClose();
@@ -23,8 +22,9 @@ class MoviesForm extends React.Component {
   handleSave = () => {
     const { selectedValue, onClose, addMovie, updateMovie } = this.props;
     const { id, name, genre, rate, directorId, watched } = selectedValue;
-    id ? updateMovie({id, name, genre, rate: Number(rate), directorId, watched: Boolean(watched)})
-      : addMovie({name, genre, rate: Number(rate), directorId, watched: Boolean(watched)});
+    id ?
+    updateMovie({id, name, genre, rate: Number(rate), directorId, watched: Boolean(watched) }) :
+    addMovie({ name, genre, rate: Number(rate), directorId, watched: Boolean(watched) });
     onClose();
   };
 
@@ -32,6 +32,7 @@ class MoviesForm extends React.Component {
     const { data = {}, classes, open, handleChange, handleSelectChange, handleCheckboxChange, selectedValue = {} } = this.props;
     const { name, genre, rate, directorId, watched } = selectedValue;
     const { directors = [] } = data;
+
     return (
       <Dialog onClose={this.handleClose} open={open} aria-labelledby="simple-dialog-title">
         <DialogTitle className={classes.title} id="simple-dialog-title">Movie information</DialogTitle>

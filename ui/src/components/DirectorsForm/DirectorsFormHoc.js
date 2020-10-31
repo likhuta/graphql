@@ -1,28 +1,35 @@
 import { withStyles } from '@material-ui/core/styles';
 import { compose } from 'recompose';
-
 import { graphql } from 'react-apollo';
-import { addDirectorMutation, updateDirectorMutation} from './mutation';
-import { directorQuery } from '../DirectorsTable/queries';
+
+import { addDirectorMutation, updatedDirectorMutation } from './mutations';
+import { directorsQuery } from '../DirectorsTable/queries';
 
 import { styles } from './styles';
 
-const withGraphqlAdd = graphql( addDirectorMutation, {
-  props: ({mutate}) => ({
-    addDirector: director => mutate({
-      variables: director,
-      refetchQueries: [{ query: directorQuery }]
-    })
+const withGraphQL = compose(
+  graphql(addDirectorMutation, {
+    props: ({ mutate }) => ({
+      addDirector: director => mutate({
+        variables: director,
+        refetchQueries: [{
+          query: directorsQuery,
+          variables: { name: '' },
+        }],
+      }),
+    }),
+  }),
+  graphql(updatedDirectorMutation, {
+    props: ({ mutate }) => ({
+      updateDirector: director => mutate({
+        variables: director,
+        refetchQueries: [{
+          query: directorsQuery,
+          variables: { name: '' },
+        }],
+      }),
+    }),
   })
-})
+);
 
-const withGraphqlUpdate = graphql( updateDirectorMutation, {
-  props: ({mutate}) => ({
-    updateDirector: director => mutate({
-      variables: director,
-      refetchQueries: [{ query: directorQuery }]
-    })
-  })
-})
-
-export default compose(withStyles(styles), withGraphqlAdd, withGraphqlUpdate);
+export default compose(withStyles(styles), withGraphQL);

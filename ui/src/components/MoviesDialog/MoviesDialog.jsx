@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import BlockIcon from '@material-ui/icons/Block';
 
-import withHocs from './MovieDialogHoc';
+import withHocs from './MoviesDialogHoc';
 
 class MoviesDialog extends React.Component {
 
